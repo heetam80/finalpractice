@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'book.apps.BookConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -153,3 +154,9 @@ DATABASES = {
 
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+LOGIN_REDIRECT_URL = 'list-book'
+
+LANGUAGE_CODE = 'ja'
+
+TIME_ZONE = 'Asia/Tokyo'
