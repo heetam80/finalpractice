@@ -20,10 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
+SECRET_KEY = 'django-insecure-k6ka0135gz_lvbxqq65g20l2=^9-xzkwp5413ht%mvo_x9+ga3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'book.apps.BookConfig',
     'accounts.apps.AccountsConfig',
+    'book.apps.BookConfig',
 ]
 
 MIDDLEWARE = [
@@ -105,9 +105,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ja'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -118,45 +118,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import os
-import environ
-
-# 環境変数を管理するためのenvオブジェクト作成
-env = environ.Env()
-# .envファイルの読み込み
-env.read_env('.env')
-# .envファイルからSECRET_KEYを読み込み
-SECRET_KEY = env('SECRET_KEY')
-# .envファイルからDEBUGの値を取得し、真偽値に変換
-DEBUG = env.bool('DEBUG', default=False)
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-DATABASES = {
-    'default': {
-        'ENGINE': env('DATABASE_ENGINE', default='django.db.backends.sqlite3'),
-        'NAME': env('DATABASE_DB', default=os.path.join(BASE_DIR, 'db.sqlite3')),
-        # 以下は、MySQLやPostgreSQLの場合に設定
-        # 'USER': env('DATABASE_USER', default='django_user'),
-        # 'PASSWORD': env('DATABASE_PASSWORD', default='password'),
-        # 'HOST': env('DATABASE_HOST', default='localhost'),
-        # 'PORT': env('DATABASE_PORT', default='5432'),
-    }
-}
-
-
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
-
 LOGIN_REDIRECT_URL = 'list-book'
-
-LANGUAGE_CODE = 'ja'
-
-TIME_ZONE = 'Asia/Tokyo'
